@@ -24,15 +24,15 @@ export class BoardsService {
         return board;
     }
 
-    getBoardById(id : string) : Board {
+    getBoardById(id : number) : Board {
         return this.boards.find((board) => board.id === id)
     }
 
-    deleteBoard(id : string) : void {
+    deleteBoard(id : number) : void {
         this.boards = this.boards.filter((board) => board.id !== id);
     }
 
-    updateBoardStatus(id : string, status: BoardStatus) : Board {
+    updateBoardStatus(id : number, status: BoardStatus) : Board {
         const board = this.getBoardById(id);
         board.status = status;
         return board;

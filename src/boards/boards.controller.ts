@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { Board, BoardStatus } from './board.Model';
 import { BoardsService } from './boards.service';
 import { CreateBoardDto } from './dto/create-board.dto';
@@ -13,7 +13,7 @@ export class BoardsController {
     }
 
     @Get('/:id')
-    getBoardById(@Param('id') id : string): Board {
+    getBoardById(@Param('id', ParseIntPipe) id : number): Board {
         return this.boardService.getBoardById(id);
     }
 
@@ -25,12 +25,12 @@ export class BoardsController {
     }
 
     @Delete('/:id')
-    deleteBoard(@Param('id') id : string) : void {
+    deleteBoard(@Param('id', ParseIntPipe) id : number) : void {
         this.boardService.deleteBoard(id);
     }
 
     @Patch('/:id/status')
-    updateBoardStatus(@Param('id') id: string, @Param('status') status: BoardStatus) : Board {
+    updateBoardStatus(@Param('id', ParseIntPipe) id: number, @Param('status') status: BoardStatus) : Board {
         return this.boardService.updateBoardStatus(id, status)
     }
 }
