@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Board, BoardStatus } from './board.Model';
 import { BoardsService } from './boards.service';
 import { CreateBoardDto } from './dto/create-board.dto';
@@ -18,6 +18,7 @@ export class BoardsController {
     }
 
     @Post('/')
+    @UsePipes(ValidationPipe) // 유효성 검사 Pipe (@Post, @Get, @Patch와 같은 Handler - level Pipe)
     createBoard(
         @Body() createBoardDto: CreateBoardDto
     ): Board {
