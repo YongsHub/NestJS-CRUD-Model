@@ -24,7 +24,7 @@ export class BoardsService {
         return board;
     }
 
-    getBoardById(id : number) : Board {
+    getBoardById(id : string) : Board {
         const found : Board = this.boards.find((board) => board.id === id)
 
         if(!found) { // 찾는 idr가 존재하지 않는다면
@@ -33,12 +33,12 @@ export class BoardsService {
         return found;
     }
 
-    deleteBoard(id : number) : void {
+    deleteBoard(id : string) : void {
         const found = this.getBoardById(id);
         this.boards = this.boards.filter((board) => board.id !== found.id);
     }
 
-    updateBoardStatus(id : number, status: BoardStatus) : Board {
+    updateBoardStatus(id : string, status: BoardStatus) : Board {
         const board = this.getBoardById(id);
         board.status = status;
         return board;
