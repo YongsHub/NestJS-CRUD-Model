@@ -28,6 +28,19 @@ export class BoardsService {
     //     this.boards.push(board)
     //     return board;
     // }
+    async createBoard(createBoardDto : CreateBoardDto): Promise <Board> {
+        const {title, description} = createBoardDto;
+
+        const board = this.boardRepository.create({
+            title,
+            description,
+            status: BoardStatus.PUBLIC
+        })
+
+        await this.boardRepository.save(board);
+        return board;
+    }
+
     async getBoardById(id: number): Promise <Board> {
         const found = await this.boardRepository.findOne(id);
 
