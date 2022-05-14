@@ -18,6 +18,11 @@ export class BoardsController {
     createBoard(@Body() createBoardDto : CreateBoardDto) : Promise<Board> {
         return this.boardService.createBoard(createBoardDto);
     }
+
+    @Delete('/:id')
+    deleteBoard(@Param('id', ParseIntPipe) id) : Promise<void> {
+        return this.boardService.deleteBoard(id);
+    }
     // @Get('/')
     // getAllBoard(): Board[] {
     //     return this.boardService.getAllBoards();
